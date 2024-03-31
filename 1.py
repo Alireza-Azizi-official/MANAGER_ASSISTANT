@@ -48,7 +48,7 @@ def remove_employee():
     
     if (check_employee(id)==False):
         print("the one you want remove is not even in the list.\n enter another id.")
-        print("_________________________________")
+        print("_____________________________________")
         time.sleep(2)
         menu()
         
@@ -67,17 +67,20 @@ def promot_employee():
     id = input('enter the employee id:')
     
     if (check_employee(id)==False):
-        print("there is not such employee with this id. try another one.")
+        print("there is no such employee with this id. try another one.")
+        time.sleep(2)
+        print("_____________________________________")
+        menu() 
         
     else:
-        amount = int(input("how much do you want to add to the salary"))
+        amount = int(input("how much do you want to add to the salary:"))
         
         sql='select salary from employee_record where id=%s'
         data = (id, )
         c = con.cursor()
         c.execute(sql, data)
         r = c.fetchone()
-        t = r[0] + amount
+        t = int(r[0]) + amount
         sql = "update employee_record set salary=%s where id=%s"
         d = (t, id)
         c.execute(sql, d)
@@ -112,6 +115,7 @@ def menu():
     print("5 to EXIT")
     
     ch = int(input("what do you want to do:"))
+    print("_______________________________________")
     
     if ch == 1:
         add_employe()
@@ -125,7 +129,8 @@ def menu():
         print("TAKE CARE.")
         exit(0)
     else:
-        print("!! INVALID NUMBER ENTERED.")
-        menu()
-        
+        print("!! INVALID NUMBER ENTERED !!")
+        time.sleep(2)
+        print("______________________________________")
+        menu()       
 menu()
